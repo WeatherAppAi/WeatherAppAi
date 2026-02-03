@@ -1,1 +1,36 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vær + Klesrådgiver</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Vær App med Klesrådgiver</h1>
+  </header>
+
+  <main>
+    <!-- Søkefelt -->
+    <div class="search">
+      <input type="text" id="cityInput" placeholder="Skriv inn by">
+      <button id="searchBtn">Søk</button>
+    </div>
+
+    <!-- Værresultat -->
+    <div id="weatherResult" class="weather-card hidden">
+      <h2 id="cityName"></h2>
+      <img id="weatherIcon" alt="Værikon">
+      <p id="temperature"></p>
+      <p id="description"></p>
+      <p id="humidity"></p>
+      <p id="wind"></p>
+      <p id="clothingAdvice"></p>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
 
