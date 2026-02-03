@@ -174,3 +174,34 @@ header h1 {
 .hidden {
   display: none;
 }
+/* Dynamiske bakgrunner */
+body.sunny {
+  background: linear-gradient(to bottom, #ffe680, #fff5cc); /* solgul */
+}
+
+body.cloudy {
+  background: linear-gradient(to bottom, #d9e2ec, #f0f4f8); /* grå/blå */
+}
+
+body.rain {
+  background: linear-gradient(to bottom, #a0c4ff, #d0e7ff); /* blåregn */
+}
+
+body.snow {
+  background: linear-gradient(to bottom, #f0f8ff, #e6f2ff); /* lys blå snø */
+}
+
+/* Små regn-dråper animasjon */
+.rain-drop {
+  position: absolute;
+  width: 2px;
+  height: 10px;
+  background: rgba(255,255,255,0.7);
+  animation: fall 1s linear infinite;
+}
+
+@keyframes fall {
+  0% { top: -10px; opacity: 0; }
+  50% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
