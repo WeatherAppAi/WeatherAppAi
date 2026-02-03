@@ -3,40 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vær + Klesrådgiver</title>
+  <title>YR-stil Vær App</title>
   <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
   <header>
     <h1>Vær App med Klesrådgiver</h1>
+    <div class="search">
+      <input type="text" id="cityInput" placeholder="Skriv inn by eller by,land">
+      <button id="searchBtn">Søk</button>
+    </div>
   </header>
 
   <main>
-    <!-- Søkefelt -->
-    <div class="search">
-      <input type="text" id="cityInput" placeholder="Skriv inn by">
-      <button id="searchBtn">Søk</button>
+    <!-- Værkort -->
+    <div id="weatherResult" class="weather-card hidden">
+      <div class="weather-main">
+        <div class="weather-temp">
+          <h2 id="cityName"></h2>
+          <img id="weatherIcon" alt="Værikon">
+          <p id="temperature"></p>
+          <p id="description"></p>
+        </div>
+        <div class="weather-details">
+          <p id="humidity"></p>
+          <p id="wind"></p>
+          <p id="clothingAdvice"></p>
+          <button id="addFavoriteBtn">Legg til favoritt</button>
+        </div>
+      </div>
     </div>
 
-   <div id="weatherResult" class="weather-card hidden">
-  <div class="weather-main">
-    <div class="weather-temp">
-      <h2 id="cityName"></h2>
-      <img id="weatherIcon" alt="Værikon">
-      <p id="temperature"></p>
-      <p id="description"></p>
-    </div>
-    <div class="weather-details">
-      <p id="humidity"></p>
-      <p id="wind"></p>
-      <p id="clothingAdvice"></p>
-      <button id="addFavoriteBtn">Legg til favoritt</button>
-    </div>
-  </div>
-</div>
-
-
-    <!-- Favoritter -->
+    <!-- Favorittbyer -->
     <div class="favorites">
       <h3>Dine favoritter</h3>
       <ul id="favoriteList"></ul>
