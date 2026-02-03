@@ -16,7 +16,7 @@ const favoriteList = document.getElementById("favoriteList");
 
 let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
 
-// Vis favoritter
+// ==================== FAVORITTER ====================
 function renderFavorites() {
   favoriteList.innerHTML = "";
   favorites.forEach(city => {
@@ -27,7 +27,6 @@ function renderFavorites() {
   });
 }
 
-// Legg til favoritt
 addFavoriteBtn.addEventListener("click", () => {
   const currentCity = cityName.textContent.split(",")[0];
   if (!favorites.includes(currentCity)) {
@@ -37,7 +36,7 @@ addFavoriteBtn.addEventListener("click", () => {
   }
 });
 
-// Søk knapp
+// ==================== SØK ====================
 searchBtn.addEventListener("click", () => {
   const city = cityInput.value.trim();
   if (!city) {
@@ -47,7 +46,7 @@ searchBtn.addEventListener("click", () => {
   fetchWeather(city);
 });
 
-// Hent vær
+// ==================== HENT VÆR ====================
 async function fetchWeather(city) {
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=no`;
   try {
@@ -65,13 +64,16 @@ async function fetchWeather(city) {
     clothingAdvice.textContent = getClothingSuggestion(data.main.temp, data.weather[0].main);
 
     weatherResult.classList.remove("hidden");
+
+    // Dynamisk bakgrunn
+    setBackground(data.weather[0].main);
   } catch (error) {
     alert(error.message);
     weatherResult.classList.add("hidden");
   }
 }
 
-// AI-klesråd
+// ==================== AI KLESRÅD ====================
 function getClothingSuggestion(temp, weather) {
   let suggestion = "Vi anbefaler: ";
   if (temp < 5) suggestion += "tykk jakke, lue og hansker";
@@ -84,10 +86,40 @@ function getClothingSuggestion(temp, weather) {
   return suggestion;
 }
 
-// Stor forbokstav
+// ==================== HJELPEFUNKSJON ====================
 function capitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-// Last inn favoritter ved start
+// ==================== DYNAMISK BAKGRUNN ====================
+function setBackground(weather) {
+  // Fjern gamle klasser og regndråper
+  document.body.className = "";
+  document.querySelectorAll(".rain-drop").forEach(e => e.remove());
+
+  if (weather.toLowerCase().includes("cloud")) {
+    document.body.classList.add("cloudy");
+  } else if (weather.toLowerCase().includes("rain") || weather.toLowerCase().includes("drizzle")) {
+    document.body.classList.add("rain");
+    createRainAnimation();
+  } else if (weather.toLowerCase().includes("snow")) {
+    document.body.classList.add("snow");
+  } else {
+    document.body.classList.add("sunny");
+  }
+}
+
+// ==================== REGN-ANIMASJON ====================
+function createRainAnimation() {
+  for (let i = 0; i < 50; i++) {
+    const drop = document.createElement("div");
+    drop.classList.add("rain-drop");
+    drop.style.left = Math.random() * window.innerWidth + "px";
+    drop.style.animationDuration = 0.5 + Math.random() * 0.5 + "s";
+    drop.style.opacity = Math.random();
+    document.body.appendChild(drop);
+  }
+}
+
+// ==================== LAST INN FAVORITTER ====================
 renderFavorites();
