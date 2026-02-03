@@ -27,10 +27,26 @@
       <p id="humidity"></p>
       <p id="wind"></p>
       <p id="clothingAdvice"></p>
+      <button id="addFavoriteBtn">Legg til favoritt</button>
+    </div>
+
+    <!-- Favoritter -->
+    <div class="favorites">
+      <h3>Dine favoritter</h3>
+      <ul id="favoriteList"></ul>
+    </div>
+
+    <!-- Topp 5 populære byer -->
+    <div class="topCities">
+      <h3>Populære byer</h3>
+      <button onclick="fetchWeather('Oslo,no')">Oslo</button>
+      <button onclick="fetchWeather('Bergen,no')">Bergen</button>
+      <button onclick="fetchWeather('Trondheim,no')">Trondheim</button>
+      <button onclick="fetchWeather('Stavanger,no')">Stavanger</button>
+      <button onclick="fetchWeather('Tromsø,no')">Tromsø</button>
     </div>
   </main>
 
   <script src="script.js"></script>
 </body>
 </html>
-
