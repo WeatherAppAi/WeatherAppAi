@@ -1,5 +1,11 @@
-const apiKey = "fea9d4df6ce4196562db128b257ac5cd"; // Bytt ut med din OpenWeatherMap API-nøkkel
+// ---------------------------
+// DIN OPENWEATHERMAP API NØKKEL
+// ---------------------------
+const apiKey = "fea9d4df6ce4196562db128b257ac5cd";
 
+// ---------------------------
+// HTML ELEMENTER
+// ---------------------------
 const searchBtn = document.getElementById("searchBtn");
 const cityInput = document.getElementById("cityInput");
 
@@ -12,32 +18,44 @@ const humidity = document.getElementById("humidity");
 const wind = document.getElementById("wind");
 const clothingAdvice = document.getElementById("clothingAdvice");
 
-// Søk-knapp
+// ---------------------------
+// SØK KNAPP
+// ---------------------------
 searchBtn.addEventListener("click", () => {
   const city = cityInput.value.trim();
-  if (city) {
-    fetchWeather(city);
+  if (!city) {
+    alert("Skriv inn en by!");
+    return;
   }
+  fetchWeather(city);
 });
 
-// Hent værdata
+// ---------------------------
+// FUNKSJON FOR Å HENTE VÆR
+// ---------------------------
 async function fetchWeather(city) {
+  // Tillater at brukeren skriver by, eller by,land
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=no`;
-  
+
   try {
     const response = await fetch(url);
     if (!response.ok) throw new Error("By ikke funnet");
+
     const data = await response.json();
-    
-    // Vis værdata
+
+    // ---------------------------
+    // VIS VÆRDATA
+    // ---------------------------
     cityName.textContent = `${data.name}, ${data.sys.country}`;
     temperature.textContent = `Temperatur: ${data.main.temp}°C`;
-    description.textContent = `Vær: ${data.weather[0].description}`;
+    description.textContent = `Vær: ${capitalize(data.weather[0].description)}`;
     humidity.textContent = `Fuktighet: ${data.main.humidity}%`;
     wind.textContent = `Vind: ${data.wind.speed} m/s`;
     weatherIcon.src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
 
-    // AI-klesråd
+    // ---------------------------
+    // AI-KLESRÅDGIVER
+    // ---------------------------
     clothingAdvice.textContent = getClothingSuggestion(data.main.temp, data.weather[0].main);
 
     weatherResult.classList.remove("hidden");
@@ -47,7 +65,9 @@ async function fetchWeather(city) {
   }
 }
 
-// Enkel AI-klesrådgiver
+// ---------------------------
+// FUNKSJON: AI-KLESRÅD
+// ---------------------------
 function getClothingSuggestion(temp, weather) {
   let suggestion = "Vi anbefaler: ";
 
@@ -61,3 +81,9 @@ function getClothingSuggestion(temp, weather) {
   return suggestion;
 }
 
+// ---------------------------
+// HJELPEFUNKSJON: Stor forbokstav
+// ---------------------------
+function capitalize(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
