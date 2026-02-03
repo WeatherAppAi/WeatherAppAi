@@ -1,4 +1,4 @@
-const apiKey = "DIN_API_KEY_HER"; // Bytt ut med din OpenWeatherMap API-nøkkel
+const apiKey = "fea9d4df6ce4196562db128b257ac5cd"; // Bytt ut med din OpenWeatherMap API-nøkkel
 
 const searchBtn = document.getElementById("searchBtn");
 const cityInput = document.getElementById("cityInput");
