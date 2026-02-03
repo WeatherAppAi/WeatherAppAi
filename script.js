@@ -16,9 +16,7 @@ const favoriteList = document.getElementById("favoriteList");
 
 let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
 
-// ------------------
-// VIS FAVORITTER
-// ------------------
+// Vis favoritter
 function renderFavorites() {
   favoriteList.innerHTML = "";
   favorites.forEach(city => {
@@ -29,9 +27,7 @@ function renderFavorites() {
   });
 }
 
-// ------------------
-// LEGG TIL FAVORITT
-// ------------------
+// Legg til favoritt
 addFavoriteBtn.addEventListener("click", () => {
   const currentCity = cityName.textContent.split(",")[0];
   if (!favorites.includes(currentCity)) {
@@ -41,9 +37,7 @@ addFavoriteBtn.addEventListener("click", () => {
   }
 });
 
-// ------------------
-// SØK KNAPP
-// ------------------
+// Søk knapp
 searchBtn.addEventListener("click", () => {
   const city = cityInput.value.trim();
   if (!city) {
@@ -53,12 +47,9 @@ searchBtn.addEventListener("click", () => {
   fetchWeather(city);
 });
 
-// ------------------
-// HENT VÆR
-// ------------------
+// Hent vær
 async function fetchWeather(city) {
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=no`;
-
   try {
     const response = await fetch(url);
     if (!response.ok) throw new Error("By ikke funnet");
@@ -80,9 +71,7 @@ async function fetchWeather(city) {
   }
 }
 
-// ------------------
-// AI-KLESRÅD
-// ------------------
+// AI-klesråd
 function getClothingSuggestion(temp, weather) {
   let suggestion = "Vi anbefaler: ";
   if (temp < 5) suggestion += "tykk jakke, lue og hansker";
@@ -95,14 +84,10 @@ function getClothingSuggestion(temp, weather) {
   return suggestion;
 }
 
-// ------------------
-// HJELPEFUNKSJON: Stor forbokstav
-// ------------------
+// Stor forbokstav
 function capitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-// ------------------
-// LAST INN FAVORITTER VED START
-// ------------------
+// Last inn favoritter ved start
 renderFavorites();
